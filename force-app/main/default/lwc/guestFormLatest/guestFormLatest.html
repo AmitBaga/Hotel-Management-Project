@@ -1,0 +1,81 @@
+<template>
+    <lightning-card title="Guest Entry Form" icon-name="custom:custom21" columns="2">
+
+        
+       
+        <lightning-record-edit-form  object-api-name={ObjectApiName1}
+                     onsuccess={handleSuccess}
+                     columns="2"
+                       density="Compact">
+        
+              <lightning-input-field field-name={hotelcity}></lightning-input-field>
+              <lightning-input-field field-name={hoteltype}></lightning-input-field>
+              
+        </lightning-record-edit-form>
+    
+    
+    <lightning-record-edit-form  object-api-name={ObjectApiName2}
+                                      onsuccess={handleSuccess}
+                                      columns="2"
+                                     density="Compact">
+    
+       <lightning-input-field field-name={firstnameField} ></lightning-input-field>
+       <lightning-input-field field-name={lastnameField}></lightning-input-field>
+       <lightning-input-field field-name={phoneField}></lightning-input-field>
+       <lightning-input-field field-name={emailField}></lightning-input-field>
+
+       <lightning-input type="number" label="Number of Adults (12+)"></lightning-input>
+       <lightning-input type="number" label="Number of Chindren (0-12)"></lightning-input>
+       <lightning-input type="date" label="Check In Date"></lightning-input>
+       <lightning-input type="date" label="Check Out Date"></lightning-input>
+
+       <lightning-button label="Save" variant="brand" type="submit" ></lightning-button>
+       
+    </lightning-record-edit-form>
+    
+    
+    
+    </lightning-card>
+
+
+
+
+
+
+    <lightning-card title="Hotel Search" icon-name="standard:account">
+        <div if:true={errorMsg} style="margin-left: 3%;">
+            <p style="color: red;">{errorMsg}</p>
+        </div>
+ 
+        <lightning-layout multiple-rows="true" vertical-align="end">
+            <lightning-layout-item size="12" small-device-size="10" medium-device-size="8" large-device-size="6" padding="around-small">
+                    <div class="slds-form-element">
+                            <div class="slds-form-element__control">
+                               <lightning-record-edit-form  object-api-name={ObjectApiName}
+                                       onsuccess={handleSuccess}
+                                       columns="2"
+                                      density="Compact">
+    
+       <lightning-input-field field-name={hotelcity}  onchange={handleAccountName}></lightning-input-field>
+       <lightning-input-field field-name={hoteltype}  onchange={handleAccountName}></lightning-input-field>
+       
+ </lightning-record-edit-form>           
+                            </div>
+                        </div> 
+            </lightning-layout-item>
+            <lightning-layout-item size="12" small-device-size="2" medium-device-size="2" large-device-size="2" padding="around-small">
+                    <lightning-button label="Search" 
+                                      variant="brand" 
+                                      onclick={handleSearch}></lightning-button>
+                </lightning-layout-item>
+            </lightning-layout><br/>
+ 
+        <div if:true={searchData}>
+            <lightning-datatable data={searchData} 
+                                 columns={columns} 
+                                 key-field="id"
+                                 hide-checkbox-column="true"></lightning-datatable>
+        </div>
+    </lightning-card>
+    
+</template>
